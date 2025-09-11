@@ -1,0 +1,1 @@
+/Users/oliverkorber/ui5-data-binding.session
