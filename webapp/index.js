@@ -3,13 +3,14 @@ sap.ui.require(
   function (Text, JSONModel) {
     "use strict";
 
-    var oModel = sap.ui.getCore().attachInit(function () {
+    sap.ui.getCore().attachInit(function () {
       var oModel = new JSONModel({
-        greetingText: "Hi, my name is... Oliver",
+        greetingText: "Hi, my name is... Oliver!",
       });
+      sap.ui.getCore().setModel(oModel);
 
       new Text({
-        text: "Hi, my name is... Oliver",
+        text: "{/greetingText}",
       }).placeAt("content");
     });
   },
