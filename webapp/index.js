@@ -1,6 +1,10 @@
 sap.ui.require(
-  ["sap/m/Text", "sap/ui/model/json/JSONModel", "sap/ui/core/mvc/XMLView"],
-  function (Text, JSONModel, XMLView) {
+  ["sap/m/Text",
+   "sap/ui/model/json/JSONModel", 
+   "sap/ui/core/mvc/XMLView",
+   "sap/ui/model/BindingMode"
+  ],
+  function (Text, JSONModel, XMLView, BindingMode) {
     "use strict";
 
     sap.ui.getCore().attachInit(function () {
@@ -10,6 +14,7 @@ sap.ui.require(
         lastName: "Körber",
         enabled: true
       });
+      oModel.setDefaultBindingMode(BindingMode.OneWay);
       sap.ui.getCore().setModel(oModel);
 
       new XMLView({
