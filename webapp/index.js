@@ -1,10 +1,10 @@
 sap.ui.require(
   [
-   "sap/m/Text",
-   "sap/ui/model/json/JSONModel", 
-   "sap/ui/core/mvc/XMLView",
-   "sap/ui/model/BindingMode",
-   "sap/ui/model/resource/ResourceModel"
+    "sap/m/Text",
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/core/mvc/XMLView",
+    "sap/ui/model/BindingMode",
+    "sap/ui/model/resource/ResourceModel",
   ],
   function (Text, JSONModel, XMLView, BindingMode, ResourceModel) {
     "use strict";
@@ -14,20 +14,26 @@ sap.ui.require(
         panelHeaderText: "Data Binding",
         firstName: "Oliver",
         lastName: "Körber",
-        enabled: true
+        address: {
+          street: "Weidmannstr. 2",
+          city: "Rothenburg",
+          zipcode: "91541",
+          country: "Germany",
+        },
+        enabled: true,
       });
 
       var oResourceModel = new ResourceModel({
         bundleName: "sap.ui.demo.db.i18n.i18n",
         supportedLocales: ["", "de"],
-        fallbackLocale: ""
-      })
+        fallbackLocale: "",
+      });
       // oModel.setDefaultBindingMode(BindingMode.OneWay);
       sap.ui.getCore().setModel(oModel);
       sap.ui.getCore().setModel(oResourceModel, "i18n");
 
       new XMLView({
-        viewName: "sap.ui.demo.db.view.App"
+        viewName: "sap.ui.demo.db.view.App",
       }).placeAt("content");
     });
   },
