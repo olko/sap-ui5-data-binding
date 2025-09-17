@@ -34,9 +34,11 @@ sap.ui.require(
       sap.ui.getCore().setModel(oModel);
       sap.ui.getCore().setModel(oResourceModel, "i18n");
 
-      new XMLView({
+      var oView = new XMLView({
         viewName: "sap.ui.demo.db.view.App",
-      }).placeAt("content");
+      });
+      sap.ui.getCore().getMessageManager().registerObject(oView, true);
+      oView.placeAt("content");
     });
   },
 );

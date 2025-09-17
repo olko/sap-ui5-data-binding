@@ -54,7 +54,6 @@
                 <Input
                     description="{/currencyCode}"
                     enabled="{/enabled}"
-                    editable="false"
                     id="salesAmount"
                     value="{
                             parts: [
