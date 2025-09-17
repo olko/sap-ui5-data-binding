@@ -20,6 +20,8 @@ sap.ui.require(
           zipcode: "91541",
           country: "Germany",
         },
+        salesAmount: 12345.6789,
+        currencyCode: "EUR",
         enabled: true,
       });
 
