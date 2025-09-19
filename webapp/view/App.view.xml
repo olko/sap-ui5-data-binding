@@ -25,50 +25,90 @@
             <Label text="{i18n>enabledText}" />
             <CheckBox selected="{/enabled}" />
         </form:SimpleForm>
-        <Panel headerText="{i18n>panel2HeaderText}">
-            <content>
-                <l:VerticalLayout>
-                    <Label
-                        text="{i18n>address}"
-                        labelFor="address"
-                        />
-                    <FormattedText
-                        htmlText="{/address/street}&lt;br&gt;{/address/zipcode} {/address/city}&lt;br&gt;{/address/country}"
-                        class="sapUiResponsiveMargin"
-                        width="200px"
-                        id="address"
-                        />
-                    <Link
-                        href="{
-                            parts: ['/firstName', '/lastName'],
-                            formatter: '.formatMail'
-                        }"
-                        text="Email"
-                        />
-                </l:VerticalLayout>
-                <l:VerticalLayout>
+    </Panel>
+    <Panel headerText="{i18n>panel2HeaderText}"
+           class="sapUiResponsiveMargin"
+           width="auto">
+        <content>
+            <l:VerticalLayout>
                 <Label
-                    labelFor="salesAmount"
-                    text="{i18n>salesAmount}"
+                    text="{i18n>address}"
+                    labelFor="address"
                     />
-                <Input
-                    description="{/currencyCode}"
-                    enabled="{/enabled}"
-                    id="salesAmount"
-                    value="{
-                            parts: [
-                                { path: '/salesAmount' },
-                                { path: '/currencyCode' }
-                            ],
-                            type: 'sap.ui.model.type.Currency',
-                            formatOptions: {
-                                preserveDecimals: false,
-                                showMeasure : false
+                <FormattedText
+                    htmlText="{/address/street}&lt;br&gt;{/address/zipcode} {/address/city}&lt;br&gt;{/address/country}"
+                    class="sapUiResponsiveMargin"
+                    width="200px"
+                    id="address"
+                    />
+                <Link
+                    href="{
+                        parts: ['/firstName', '/lastName'],
+                        formatter: '.formatMail'
+                    }"
+                    text="Email"
+                    />
+            </l:VerticalLayout>
+            <l:VerticalLayout>
+            <Label
+                labelFor="salesAmount"
+                text="{i18n>salesAmount}"
+                />
+            <Input
+                description="{/currencyCode}"
+                enabled="{/enabled}"
+                id="salesAmount"
+                value="{
+                        parts: [
+                            { path: '/salesAmount' },
+                            { path: '/currencyCode' }
+                        ],
+                        type: 'sap.ui.model.type.Currency',
+                        formatOptions: {
+                            preserveDecimals: false,
+                            showMeasure : false
+                        }
+                     }"
+                />
+            </l:VerticalLayout>
+        </content>
+    </Panel>
+    <Panel
+        headerText="{i18n>panel3HeaderText}"
+        class="sapUiResponsiveMargin"
+        width="auto">
+        <List
+            headerText="{i18n>productListTitle}"
+            items="{products>/Products}"
+            >
+            <ObjectListItem
+                title='{products>ProductName}'
+                number="{
+                    parts: [
+                        { path: 'products>UnitPrice' },
+                        { path: '/currencyCode' }
+                    ],
+                    type: 'sap.ui.model.type.Currency',
+                    formatOptions: { showMeasure: false }
+                }"
+                numberUnit='{/currencyCode}'>
+                <attributes>
+                    <ObjectAttribute
+                        text="{products>QuantityPerUnit}"/>
+                    <ObjectAttribute
+                        title="{i18n>stockValue}"
+                        text="
+                            {
+                                parts: [
+                                    { path: 'products>UnitsInStock' },
+                                    { path: 'products>UnitPrice' },
+                                    { path: '/currencyCode' }
+                                ],
+                                formatter: '.formatStockValue'
                             }
-                         }"
-                    />
-                </l:VerticalLayout>
-            </content>
-        </Panel>
+                        "/>
+                </attributes>
+            </ObjectListItem>
+        </List>
     </Panel>
 </mvc:View>

@@ -10,6 +10,9 @@ sap.ui.require(
     "use strict";
 
     sap.ui.getCore().attachInit(function () {
+      var oProductModel = new JSONModel();
+      oProductModel.loadData("./model/Products.json");
+
       var oModel = new JSONModel({
         panelHeaderText: "Data Binding",
         firstName: "Oliver",
@@ -33,6 +36,7 @@ sap.ui.require(
       // oModel.setDefaultBindingMode(BindingMode.OneWay);
       sap.ui.getCore().setModel(oModel);
       sap.ui.getCore().setModel(oResourceModel, "i18n");
+      sap.ui.getCore().setModel(oProductModel, "products");
 
       var oView = new XMLView({
         viewName: "sap.ui.demo.db.view.App",
