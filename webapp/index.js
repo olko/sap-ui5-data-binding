@@ -10,40 +10,47 @@ sap.ui.require(
     "use strict";
 
     sap.ui.getCore().attachInit(function () {
-      var oProductModel = new JSONModel();
-      oProductModel.loadData("./model/Products.json");
+        var oProductModel = new JSONModel();
+        oProductModel.loadData("./model/Products.json");
 
-      var oModel = new JSONModel({
-        panelHeaderText: "Data Binding",
-        firstName: "Oliver",
-        lastName: "Körber",
-        address: {
-          street: "Weidmannstr. 2",
-          city: "Rothenburg",
-          zipcode: "91541",
-          country: "Germany",
-        },
-        priceThreshold: 20,
-        salesAmount: 12345.6789,
-        currencyCode: "EUR",
-        enabled: true,
-      });
+        oProductModel.attachRequestCompleted(e => {
+          console.log("DONE", oProductModel.getData());
+        });
+        oProductModel.attachRequestFailed(e => {
+          console.error("FAILED", e.getParameter("message"), e.getParameters());
+        });
+        sap.ui.getCore().setModel(oProductModel, "products");
 
-      var oResourceModel = new ResourceModel({
-        bundleName: "sap.ui.demo.db.i18n.i18n",
-        supportedLocales: ["", "de"],
-        fallbackLocale: "",
-      });
-      // oModel.setDefaultBindingMode(BindingMode.OneWay);
-      sap.ui.getCore().setModel(oModel);
-      sap.ui.getCore().setModel(oResourceModel, "i18n");
-      sap.ui.getCore().setModel(oProductModel, "products");
+        var oModel = new JSONModel({
+          panelHeaderText: "Data Binding",
+          firstName: "Oliver",
+          lastName: "Körber",
+          address: {
+            street: "Weidmannstr. 2",
+            city: "Rothenburg",
+            zipcode: "91541",
+            country: "Germany",
+          },
+          salesAmount: 12345.6789,
+          currencyCode: "EUR",
+          enabled: true,
+        });
 
-      var oView = new XMLView({
-        viewName: "sap.ui.demo.db.view.App",
-      });
-      sap.ui.getCore().getMessageManager().registerObject(oView, true);
-      oView.placeAt("content");
+
+        var oResourceModel = new ResourceModel({
+          bundleName: "sap.ui.demo.db.i18n.i18n",
+          supportedLocales: ["", "de"],
+          fallbackLocale: "",
+        });
+        // oModel.setDefaultBindingMode(BindingMode.OneWay);
+        sap.ui.getCore().setModel(oModel);
+        sap.ui.getCore().setModel(oResourceModel, "i18n");
+
+        var oView = new XMLView({
+          viewName: "sap.ui.demo.db.view.App",
+        });
+        sap.ui.getCore().getMessageManager().registerObject(oView, true);
+        oView.placeAt("content");
     });
-  },
+  }
 );
